@@ -1,6 +1,6 @@
-fichero = open('0_palabras_todas.txt', 'r',encoding="utf-8")
+fichero = open('0_palabras_todas.txt', 'r',encoding="utf-8") #en las siguientes lineas lee un txt y crea una lista con todas las palabras
 diccionario=[]
-for linea in fichero:
+for linea in fichero: 
     linea = linea.replace('\n', '')
     if len(linea)==5:
         diccionario.append(linea)
@@ -88,6 +88,7 @@ def eligePalabraDiccionario(nuevoDiccionario):
 palabraSugerida=eligePalabraDiccionario(diccionario)
 print("Empieza escribiendo la palabra "+ palabraSugerida + " y ya vamos viendo.")
 diccionario.remove(palabraSugerida)
+diccionarioAyuda=diccionario.copy()
 while 1==1: 
     resultado=input("¿Qué tal ha ido? Escribe los fallos con (-), los aciertos en minusculas y las letras correctas en lugar incorrecto en mayusculas: ")
     if resultado==palabraSugerida:#rompe el bucle si pones la misma palabra que te ha sugerido
@@ -95,26 +96,27 @@ while 1==1:
     contadorLetra=0
     if resultado!="0": #le pongo un 0 para quitar esa palabra por si no existe en el juego
         for letraResultado in resultado:
+            diccionario=diccionarioAyuda.copy()
             if letraResultado=="-":
                 for palabra in diccionario:
                     if palabraSugerida[contadorLetra] in palabra:
                         #print("- "+palabraSugerida[contadorLetra]+" "+palabra)
-                        diccionario.remove(palabra)
+                        diccionarioAyuda.remove(palabra)
             if letraResultado.isupper():
                 for palabra in diccionario:
                     if (palabraSugerida[contadorLetra] == palabra[contadorLetra]) or not(palabraSugerida[contadorLetra] in palabra):
                         #print("M "+palabraSugerida[contadorLetra]+" "+palabra)
-                        diccionario.remove(palabra)
+                        diccionarioAyuda.remove(palabra)
             if letraResultado.islower():
                 for palabra in diccionario:
                     if not(palabraSugerida[contadorLetra] == palabra[contadorLetra]):
                         #print("m "+palabraSugerida[contadorLetra]+" "+palabra)
-                        diccionario.remove(palabra)
+                        diccionarioAyuda.remove(palabra)
             contadorLetra=contadorLetra+1
             #con esto he modificado el diccionario con las pistas que me ha dado el juego
     else: #lo que pasa si le pongo el 0
-        diccionario.remove(palabraSugerida)
-    palabraSugerida=eligePalabraDiccionario(diccionario) #saca la palabra con mas puntos del nuevo diccionario
+        diccionarioAyuda.remove(palabraSugerida)
+    palabraSugerida=eligePalabraDiccionario(diccionarioAyuda) #saca la palabra con mas puntos del nuevo diccionario
     print("De acuerdo, ahora prueba con "+ palabraSugerida)
 print("Eso significa que hemos acertado,¡Enhorabuena!")
 
