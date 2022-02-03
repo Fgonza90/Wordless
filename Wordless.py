@@ -1,3 +1,10 @@
+"""This code helps you to solve the game Wordle. You can play the game here: https://wordle.danielfrg.com/
+The code has 3 main bodies:
+- Read a file that contains all the spanish words and place them in a list. This start at line XX
+- Choose the word from the list that will give more information once written in the game. This start at line XX
+    First, it count who many times each letter is used in the list of words.
+    Second,"""
+
 fileSpanish = open('RAE.txt', 'r',encoding="utf-8") #Open a file, read it and place the words in a list 
 raeList=[]
 for line in fileSpanish: 
