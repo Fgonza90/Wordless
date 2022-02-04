@@ -11,6 +11,7 @@ for line in fileSpanish:
     line = line.replace('\n', '')
     if len(line)==5:
         raeList.append(line)
+
 def chooseWord(listAux): #choose the word from a list that will show more information once written in the game
     abecedary={'a':0,'b':0,'c':0,'d':0,'e':0,'f':0,'g':0,'h':0,'i':0,'j':0,'k':0,'l':0,'m':0,'n':0,'ñ':0,'o':0,'p':0,'q':0,'r':0,'s':0,'t':0,'u':0,'v':0,'w':0,'x':0,'y':0,'z':0}
     dictValues = dict.fromkeys(listAux) #create a dictionary from the list of words
@@ -30,10 +31,15 @@ def chooseWord(listAux): #choose the word from a list that will show more inform
         dictValues[word]=wordValue
     highestScoreWord=max(dictValues, key=dictValues.get) #find the word with highest score
     return(highestScoreWord);
+
 chosenWord=chooseWord(raeList)#pick the first word you must use in the game
+
 print("Empieza escribiendo la palabra "+ "\033[4m"+chosenWord+"\033[0m" + " y ya vamos viendo.")
+
 raeList.remove(chosenWord)
+
 raeListAux=raeList.copy()
+
 while 1==1: #Main body of script. Remove wrong words from list.
     gameResult=input("¿Qué tal ha ido? Escribe los fallos con (-), los aciertos en minusculas y las letras correctas en lugar incorrecto en mayusculas: ")
     if gameResult==chosenWord:#finish loop if word is correct
