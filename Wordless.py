@@ -1,9 +1,16 @@
 """This code helps you to solve the game Wordle. You can play the game here: https://wordle.danielfrg.com/
 The code has 3 main bodies:
-- Read a file that contains all the spanish words and place them in a list. This start at line XX
-- Choose the word from the list that will give more information once written in the game. This start at line XX
-    First, it count who many times each letter is used in the list of words.
-    Second,"""
+- Read a file that contains all the spanish words and place them in a list. This start at line 15
+- Choose the word from the list that will give more information once written in the game. This start at line 21
+    First, it count who many times each letter is used in the list of words and asign this number to the letter.
+    Second, it add the 5 numbers asigned to each letter of a word and asign this new number to the word.
+    Lastly, it choose the word with the highest number asigned for the user to put it on the game.
+- Delete words from the list of words that don't fit with the instructions given by the game. This start at line 44.
+    - If the script receive a dash "-" as an input, it will delete all the words from the list that has the letter that replace the dash.
+        if the games stays that the letter "B" is grey, we have to write it as a dash and the script will delete all the words that contains a "B".
+    - If the script receive a capital letter as an input, it will delete all the words that don't contains that letter or words that cointains that letter in that place.
+    - If the script receive a lower case as an input, it will delete all the words that doesn't contain that letter in that exact place.
+Once the list of words is check with this information or input and many words are deleted, the script will sugest the word from the list with more points."""
 
 fileSpanish = open('RAE.txt', 'r',encoding="utf-8") #Open a file, read it and place the words in a list 
 raeList=[]
@@ -31,7 +38,7 @@ def chooseWord(listAux): #choose the word from a list that will show more inform
     highestScoreWord=max(dictValues, key=dictValues.get) #find the word with highest score
     return(highestScoreWord);
 chosenWord=chooseWord(raeList)#pick the first word you must use in the game
-print("Empieza escribiendo la palabra "+ "\033[4m"+chosenWord+"\033[0m" + " y ya vamos viendo.")
+print("Empieza escribiendo la palabra "+ chosenWord + " y ya vamos viendo.")
 raeList.remove(chosenWord)
 raeListAux=raeList.copy()
 while 1==1: #Main body of script. Remove wrong words from list.
@@ -53,5 +60,5 @@ while 1==1: #Main body of script. Remove wrong words from list.
     else: #this is what happen if I write "0"
         raeListAux.remove(chosenWord)
     chosenWord=chooseWord(raeListAux) #pick the word you must use in the next step of the game
-    print("De acuerdo, ahora prueba con "+ "\033[4m"+chosenWord+"\033[0m")
+    print("De acuerdo, ahora prueba con "+ chosenWord)
 print("Eso significa que hemos acertado,¡Enhorabuena!")
